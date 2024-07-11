@@ -49,10 +49,6 @@ public class TransactionEntity {
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
-
     @ManyToOne
     @JoinColumn(name = "account_id")
     private AccountEntity account;
