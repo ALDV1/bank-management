@@ -10,9 +10,20 @@ spring:
         format_sql: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/banking
+    url: jdbc:postgresql://localhost:5433/bank_system
     username: postgres
-    password: root
+    password: postgres
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    schemas:
+      - user_service
+      - verification_service
+      - account_service
+      - card_service
+      - transaction_service
 
   data:
     rest:

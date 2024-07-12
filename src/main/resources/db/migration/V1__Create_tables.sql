@@ -6,75 +6,6 @@ CREATE SCHEMA IF NOT EXISTS transaction_service;
 
 create table if not exists user_service.users
 (
-	id serial primary key,
-	first_name varchar(255) not null,
-	second_name varchar(255) not null,
-	email varchar(255) not null unique,
-	password_hash varchar(255) not null,
-	is_blocked boolean default false,
-	created_at timestamp default current_timestamp,
-	updated_at timestamp default current_timestamp
-);
-
-create table if not exists user_service.role
-(
-	id serial primary key,
-	name varchar(255)
-);
-
-create table if not exists user_service.user_role
-(
-	user_id int references user_service.users,
-	role_id int references user_service.role,
-	primary key(user_id, role_id)
-);
-
-create table if not exists verification_service.verification
-(
-	email text primary key,
-	code text not null
-);
-
-create table if not exists account_service.account
-(
-	id serial primary key,
-	user_id int references user_service.users(id),
-	balance decimal(15,2) default 0.0 not null,
-	status varchar(50) default 'active' not null,
-	created_at timestamp default current_timestamp,
-	updated_at timestamp default current_timestamp
-);
-
-CREATE TABLE IF NOT EXISTS card_service.card (
-    id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    card_number VARCHAR(16) NOT NULL,
-    expiry_date DATE NOT NULL,
-    cardholder_name VARCHAR(255) NOT NULL,
-    status VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (account_id) REFERENCES account_service.account(id)
-);
-
-CREATE TABLE IF NOT EXISTS transaction_service.transaction (
-    id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    amount NUMERIC(15,2) NOT NULL,
-    transaction_type VARCHAR(50) NOT NULL,
-    status VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (account_id) REFERENCES account_service.account(id) ON DELETE CASCADE
-);
-------------------------------------------
-CREATE SCHEMA IF NOT EXISTS user_service;
-CREATE SCHEMA IF NOT EXISTS verification_service;
-CREATE SCHEMA IF NOT EXISTS account_service;
-CREATE SCHEMA IF NOT EXISTS card_service;
-CREATE SCHEMA IF NOT EXISTS transaction_service;
-
-create table if not exists user_service.users
-(
     id            serial primary key,
     first_name    varchar(255) not null,
     second_name   varchar(255) not null,
@@ -83,20 +14,20 @@ create table if not exists user_service.users
     is_blocked    boolean   default false,
     created_at    timestamp default current_timestamp,
     updated_at    timestamp default current_timestamp
-);
+    );
 
 create table if not exists user_service.role
 (
     id   serial primary key,
     name varchar(255)
-);
+    );
 
 create table if not exists user_service.user_role
 (
     user_id int references user_service.users,
     role_id int references user_service.role,
     primary key (user_id, role_id)
-);
+    );
 
 create table if not exists verification_service.verification
 (
@@ -112,7 +43,7 @@ create table if not exists account_service.account
     status     varchar(50)    default 'active' not null,
     created_at timestamp      default current_timestamp,
     updated_at timestamp      default current_timestamp
-);
+    );
 
 CREATE TABLE IF NOT EXISTS card_service.card
 (
@@ -125,7 +56,7 @@ CREATE TABLE IF NOT EXISTS card_service.card
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES account_service.account (id)
-);
+    );
 
 CREATE TABLE IF NOT EXISTS transaction_service.transaction
 (
@@ -136,4 +67,4 @@ CREATE TABLE IF NOT EXISTS transaction_service.transaction
     status           VARCHAR(50),
     created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES account_service.account (id) ON DELETE CASCADE
-);
+    );

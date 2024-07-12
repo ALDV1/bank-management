@@ -34,7 +34,7 @@ public class TransactionEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_seq_generator")
     @SequenceGenerator(name = "transaction_seq_generator", sequenceName = "transaction_id_seq", allocationSize = 1)
     private Integer id;
-
+    //TODO: ИСПРАВЬ
     private Double amount;
 
     @Enumerated(EnumType.STRING)
