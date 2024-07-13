@@ -1,7 +1,6 @@
 package com.bankmanagement.services.impl;
 
 import com.bankmanagement.core.dto.CardDto;
-import com.bankmanagement.core.dto.UserDto;
 
 import java.security.Principal;
 import java.util.List;
